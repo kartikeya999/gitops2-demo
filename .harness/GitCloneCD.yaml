@@ -26,7 +26,7 @@ pipeline:
               - step:
                   type: GitClone
                   name: GitClone
-                  identifier: ShellScript_1
+                  identifier: GitClone
                   spec:
                     connectorRef: account.GitHub
                     repoName: gitops2-demo
