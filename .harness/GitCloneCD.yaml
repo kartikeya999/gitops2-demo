@@ -24,10 +24,16 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: ShellScript
+                  type: GitClone
                   name: ShellScript_1
                   identifier: ShellScript_1
                   spec:
+                    connectorRef: account.GitConnectorBzGN8G1COj
+                    repoName: myrepo
+                    build:
+                      type: branch
+                      spec:
+                        branch: main
                     shell: Bash
                     onDelegate: true
                     source:
