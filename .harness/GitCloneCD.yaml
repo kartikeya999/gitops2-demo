@@ -43,7 +43,7 @@ pipeline:
                     type: KubernetesDirect
                     spec:
                       connectorRef: account.k8s
-                      namespace: default
+                      namespace: kartikeya
               - step:
                   type: ShellScript
                   name: ShellScript_1
