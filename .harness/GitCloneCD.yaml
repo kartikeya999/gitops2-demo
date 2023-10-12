@@ -25,23 +25,16 @@ pipeline:
             steps:
               - step:
                   type: GitClone
-                  name: ShellScript_1
+                  name: GitClone
                   identifier: ShellScript_1
                   spec:
-                    connectorRef: account.GitConnectorBzGN8G1COj
-                    repoName: myrepo
+                    connectorRef: account.GitHub
+                    repoName: gitops2-demo
+                    cloneDirectory: /.harness
                     build:
                       type: branch
                       spec:
                         branch: main
-                    shell: Bash
-                    onDelegate: true
-                    source:
-                      type: Inline
-                      spec:
-                        script: echo "test"
-                    environmentVariables: []
-                    outputVariables: []
                   timeout: 10m
             rollbackSteps: []
         tags: {}
