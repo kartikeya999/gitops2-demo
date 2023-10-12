@@ -44,6 +44,20 @@ pipeline:
                     spec:
                       connectorRef: account.k8s
                       namespace: kartikeya-ng
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: echo <+codebase.commitSha>
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
             rollbackSteps: []
         tags: {}
         failureStrategies:
