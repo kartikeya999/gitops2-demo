@@ -23,19 +23,27 @@ pipeline:
             infrastructureDefinitions: <+input>
           execution:
             steps:
-              - step:
-                  type: GitClone
-                  name: GitClone
-                  identifier: GitClone
-                  spec:
-                    connectorRef: account.GitHub
-                    repoName: gitops2-demo
-                    cloneDirectory: /.harness
-                    build:
-                      type: branch
-                      spec:
-                        branch: main
-                  timeout: 10m
+              - stepGroup:
+                  name: test
+                  identifier: test
+                  steps:
+                    - step:
+                        type: GitClone
+                        name: GitClone_2
+                        identifier: GitClone_2
+                        spec:
+                          connectorRef: account.GitHub
+                          repoName: gitops2-demo
+                          cloneDirectory: /.harness
+                          build:
+                            type: branch
+                            spec:
+                              branch: main
+                  stepGroupInfra:
+                    type: KubernetesDirect
+                    spec:
+                      connectorRef: account.k8s
+                      namespace: kartikeya-ng
             rollbackSteps: []
         tags: {}
         failureStrategies:
