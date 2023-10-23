@@ -36,9 +36,9 @@ pipeline:
                           repoName: gitops2-demo
                           cloneDirectory: /.harness
                           build:
-                            type: branch
+                            type: commitSha
                             spec:
-                              branch: main
+                              commitSha: <+pipeline.variables.commitId>
                   stepGroupInfra:
                     type: KubernetesDirect
                     spec:
