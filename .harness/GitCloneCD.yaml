@@ -36,6 +36,7 @@ pipeline:
                         script: |-
                           echo "test"
                           echi "hi"
+                          ls
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
