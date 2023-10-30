@@ -23,6 +23,27 @@ pipeline:
             infrastructureDefinitions: <+input>
           execution:
             steps:
+              - stepGroup:
+                  name: test
+                  identifier: test
+                  steps:
+                    - step:
+                        type: GitClone
+                        name: GitClone_2
+                        identifier: GitClone_2
+                        spec:
+                          connectorRef: account.GitHub
+                          repoName: gitops2-demo
+                          cloneDirectory: /.harness
+                          build:
+                            type: commitSha
+                            spec:
+                              commitSha: <+pipeline.variables.commitId>
+                  stepGroupInfra:
+                    type: KubernetesDirect
+                    spec:
+                      connectorRef: account.k8s
+                      namespace: kartikeya
               - step:
                   type: ShellScript
                   name: ShellScript_1
@@ -33,10 +54,7 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: |-
-                          echo "test"
-                          echi "hi"
-                          ls
+                        script: echo <+codebase.commitSha>
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
@@ -48,3 +66,5 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+  delegateSelectors:
+    - kubernetes-delegate-kartikeya
