@@ -54,7 +54,9 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: echo <+codebase.commitSha>
+                        script: |-
+                          echo <+codebase.commitSha>
+                          ls
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
