@@ -1,0 +1,30 @@
+pipeline:
+  name: branch
+  identifier: branch
+  projectIdentifier: CSETest1
+  orgIdentifier: kartikeyaorganization
+  tags: {}
+  stages:
+    - stage:
+        name: branch
+        identifier: branch
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: echo test
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+        tags: {}
