@@ -1,5 +1,5 @@
 pipeline:
-  name: branch
+  name: branch-rename
   identifier: branch
   projectIdentifier: CSETest1
   orgIdentifier: kartikeyaorganization
