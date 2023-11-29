@@ -23,7 +23,7 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: echo test
+                        script: <+“deploy-ec2-“.concat(<+<+<+env.name> == “dev”>?“hom”:“”.concat(<+env.name>)>)>
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
