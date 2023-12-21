@@ -1,13 +1,13 @@
 pipeline:
-  name: branch-rename-again
-  identifier: branch
+  name: test-git
+  identifier: testgit
   projectIdentifier: CSETest1
   orgIdentifier: kartikeyaorganization
   tags: {}
   stages:
     - stage:
-        name: branch
-        identifier: branch
+        name: test
+        identifier: test
         description: ""
         type: Custom
         spec:
@@ -23,14 +23,8 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: <+“deploy-ec2-“.concat(<+<+<+env.name> == “dev”>?“hom”:“”.concat(<+env.name>)>)>
+                        script: echo hello
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
         tags: {}
-  variables:
-    - name: test
-      type: String
-      description: ""
-      required: false
-      value: "true"
