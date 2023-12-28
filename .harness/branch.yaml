@@ -3,7 +3,9 @@ pipeline:
   identifier: branch
   projectIdentifier: CSETest1
   orgIdentifier: kartikeyaorganization
-  tags: {}
+  tags:
+    app: test
+    pipeline: branch
   stages:
     - stage:
         name: branch
