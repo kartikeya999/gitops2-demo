@@ -39,7 +39,8 @@ pipeline:
           org: kartikeyaorganization
           pipeline: reproinvenco
           project: CSETest1
-          inputSetReferences: []
+          inputSetReferences:
+            - art3
         tags: {}
   variables:
     - name: test
