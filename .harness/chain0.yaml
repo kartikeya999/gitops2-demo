@@ -1,0 +1,28 @@
+inputSet:
+  name: chain0
+  identifier: chain0
+  orgIdentifier: kartikeyaorganization
+  projectIdentifier: CSETest1
+  pipeline:
+    identifier: branch
+    stages:
+      - stage:
+          identifier: chain0
+          type: Pipeline
+          spec:
+            inputs:
+              identifier: k8srepro
+              stages:
+                - stage:
+                    identifier: k8s
+                    type: Deployment
+                    spec:
+                      service:
+                        serviceInputs:
+                          serviceDefinition:
+                            type: Kubernetes
+                            spec:
+                              artifacts:
+                                primary:
+                                  primaryArtifactRef: <+input>
+                                  sources: <+input>
