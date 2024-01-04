@@ -40,6 +40,7 @@ pipeline:
           pipeline: reproinvenco
           project: CSETest1
           inputSetReferences: []
+        tags: {}
   variables:
     - name: test
       type: String
