@@ -30,6 +30,16 @@ pipeline:
                     outputVariables: []
                   timeout: 10m
         tags: {}
+    - stage:
+        name: chain
+        identifier: chain
+        description: ""
+        type: Pipeline
+        spec:
+          org: kartikeyaorganization
+          pipeline: reproinvenco
+          project: CSETest1
+          inputSetReferences: []
   variables:
     - name: test
       type: String
