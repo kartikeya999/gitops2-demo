@@ -8,6 +8,18 @@ pipeline:
     pipeline: branch
   stages:
     - stage:
+        name: chain
+        identifier: chain
+        description: ""
+        type: Pipeline
+        spec:
+          org: kartikeyaorganization
+          pipeline: reproinvenco
+          project: CSETest1
+          inputSetReferences:
+            - art3
+        tags: {}
+    - stage:
         name: branch
         identifier: branch
         description: ""
@@ -29,18 +41,6 @@ pipeline:
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
-        tags: {}
-    - stage:
-        name: chain
-        identifier: chain
-        description: ""
-        type: Pipeline
-        spec:
-          org: kartikeyaorganization
-          pipeline: reproinvenco
-          project: CSETest1
-          inputSetReferences:
-            - art3
         tags: {}
   variables:
     - name: test
