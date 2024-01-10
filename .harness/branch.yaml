@@ -30,8 +30,12 @@ pipeline:
                           spec:
                             artifacts:
                               primary:
-                                primaryArtifactRef: <+input>
-                                sources: <+input>
+                                primaryArtifactRef: k8s
+                                sources:
+                                  - identifier: k8s
+                                    type: DockerRegistry
+                                    spec:
+                                      tag: stable-perl
     - stage:
         name: chain
         identifier: chain
