@@ -37,18 +37,6 @@ pipeline:
                                     spec:
                                       tag: stable-perl
     - stage:
-        name: chain
-        identifier: chain
-        description: ""
-        type: Pipeline
-        spec:
-          org: kartikeyaorganization
-          pipeline: reproinvenco
-          project: CSETest1
-          inputSetReferences:
-            - art3
-        tags: {}
-    - stage:
         name: branch
         identifier: branch
         description: ""
