@@ -21,13 +21,13 @@ pipeline:
                   identifier: ShellScript_1
                   spec:
                     shell: Bash
-                    onDelegate: true
                     source:
                       type: Inline
                       spec:
-                        script: <+“deploy-ec2-“.concat(<+<+<+env.name> == “dev”>?“hom”:“”.concat(<+env.name>)>)>
+                        script: echo hi
                     environmentVariables: []
                     outputVariables: []
+                    executionTarget: {}
                   timeout: 10m
         tags: {}
   variables:
