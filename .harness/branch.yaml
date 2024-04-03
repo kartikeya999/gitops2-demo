@@ -8,35 +8,6 @@ pipeline:
     pipeline: branch
   stages:
     - stage:
-        name: chain0
-        identifier: chain0
-        description: ""
-        type: Pipeline
-        spec:
-          org: kartikeyaorganization
-          pipeline: k8srepro
-          project: CSETest1
-          inputs:
-            identifier: k8srepro
-            stages:
-              - stage:
-                  identifier: k8s
-                  type: Deployment
-                  spec:
-                    service:
-                      serviceInputs:
-                        serviceDefinition:
-                          type: Kubernetes
-                          spec:
-                            artifacts:
-                              primary:
-                                primaryArtifactRef: k8s
-                                sources:
-                                  - identifier: k8s
-                                    type: DockerRegistry
-                                    spec:
-                                      tag: stable-perl
-    - stage:
         name: branch
         identifier: branch
         description: ""
