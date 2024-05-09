@@ -1,0 +1,59 @@
+template:
+  name: repro-state-street
+  identifier: reprostatestreet
+  type: Stage
+  tags: {}
+  spec:
+    type: CI
+    spec:
+      cloneCodebase: true
+      infrastructure:
+        type: KubernetesDirect
+        spec:
+          connectorRef: account.k8s
+          namespace: kartikeya-ng
+          automountServiceAccountToken: true
+          nodeSelector: {}
+          os: Linux
+      execution:
+        steps:
+          - step:
+              type: GitClone
+              name: GitClone_1
+              identifier: GitClone_1
+              spec:
+                connectorRef: account.GitHub
+                repoName: gitops-demo
+                build:
+                  type: branch
+                  spec:
+                    branch: main
+          - step:
+              name: repro-state2
+              identifier: reprostate2
+              template:
+                templateRef: account.repro3
+                versionLabel: v1
+                gitBranch: main
+    variables:
+      - name: test
+        type: String
+        description: ""
+        required: false
+        value: <+input>
+      - name: test2
+        type: String
+        description: ""
+        required: false
+        value: <+input>
+      - name: hi
+        type: Secret
+        description: ""
+        required: false
+        value: account.aws
+      - name: test3
+        type: Number
+        description: ""
+        required: false
+        value: 123
+  versionLabel: v3
