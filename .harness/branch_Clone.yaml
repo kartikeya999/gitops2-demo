@@ -1,0 +1,39 @@
+---
+pipeline:
+  projectIdentifier: "CSETest1"
+  orgIdentifier: "kartikeyaorganization"
+  tags:
+    app: "test"
+    pipeline: "branch"
+  stages:
+  - stage:
+      name: "branch"
+      identifier: "branch"
+      description: ""
+      type: "Custom"
+      spec:
+        execution:
+          steps:
+          - step:
+              type: "ShellScript"
+              name: "ShellScript_1"
+              identifier: "ShellScript_1"
+              spec:
+                shell: "Bash"
+                source:
+                  type: "Inline"
+                  spec:
+                    script: "echo hi"
+                environmentVariables: []
+                outputVariables: []
+                executionTarget: {}
+              timeout: "10m"
+      tags: {}
+  variables:
+  - name: "test"
+    type: "String"
+    description: ""
+    required: false
+    value: "true"
+  identifier: "branch_Clone"
+  name: "branch-rename-again - Clone"
