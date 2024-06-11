@@ -1,0 +1,192 @@
+---
+pipeline:
+  projectIdentifier: "CSETest1"
+  orgIdentifier: "kartikeyaorganization"
+  tags:
+    app: "test"
+    pipeline: "tag"
+  stages:
+  - stage:
+      name: "stage1"
+      identifier: "stage1"
+      description: ""
+      type: "Deployment"
+      spec:
+        deploymentType: "Ssh"
+        execution:
+          steps:
+          - step:
+              type: "ShellScript"
+              name: "ShellScript_6"
+              identifier: "ShellScript_6"
+              spec:
+                shell: "Bash"
+                executionTarget: {}
+                source:
+                  type: "Inline"
+                  spec:
+                    script: "echo hi"
+                environmentVariables: []
+                outputVariables: []
+              timeout: "10m"
+              strategy:
+                repeat:
+                  items: "<+stage.output.hosts>"
+          - step:
+              type: "Command"
+              name: "Command_1"
+              identifier: "Command_1"
+              spec:
+                onDelegate: false
+                environmentVariables: []
+                outputVariables: []
+                commandUnits:
+                - identifier: "test"
+                  name: "test"
+                  type: "Script"
+                  spec:
+                    workingDirectory: "/"
+                    shell: "Bash"
+                    source:
+                      type: "Inline"
+                      spec:
+                        script: "echo \"hi\""
+              timeout: "10m"
+              strategy:
+                repeat:
+                  items:
+                  - "<+pipeline.variables.test99>"
+          rollbackSteps: []
+        environment:
+          environmentRef: "sshenv"
+          deployToAll: false
+          infrastructureDefinitions:
+          - identifier: "loop"
+        service:
+          serviceRef: "svc2"
+          serviceInputs:
+            serviceDefinition:
+              type: "Ssh"
+              spec:
+                artifacts:
+                  primary:
+                    primaryArtifactRef: "<+input>"
+                    sources: "<+input>"
+      tags: {}
+      failureStrategies:
+      - onFailure:
+          errors:
+          - "AllErrors"
+          action:
+            type: "ManualIntervention"
+            spec:
+              onTimeout:
+                action:
+                  type: "MarkAsFailure"
+              timeout: "1m"
+  - stage:
+      name: "loop"
+      identifier: "loop"
+      description: ""
+      type: "Custom"
+      spec:
+        environment:
+          environmentRef: "sshenv"
+          deployToAll: false
+          infrastructureDefinitions:
+          - identifier: "loop"
+        execution:
+          steps:
+          - step:
+              type: "ShellScript"
+              name: "ShellScript_1"
+              identifier: "ShellScript_1"
+              spec:
+                shell: "Bash"
+                executionTarget: {}
+                source:
+                  type: "Inline"
+                  spec:
+                    script: "echo \"hi\""
+                environmentVariables: []
+                outputVariables: []
+              timeout: "10m"
+              strategy:
+                repeat:
+                  items: "<+stage.output.hosts>"
+      tags: {}
+  - stage:
+      name: "stage2"
+      identifier: "stage2"
+      description: ""
+      type: "Deployment"
+      spec:
+        deploymentType: "Ssh"
+        service:
+          serviceRef: "svc2"
+          serviceInputs:
+            serviceDefinition:
+              type: "Ssh"
+              spec:
+                artifacts:
+                  primary:
+                    primaryArtifactRef: "<+input>"
+                    sources: "<+input>"
+        environment:
+          environmentRef: "sshenv"
+          deployToAll: false
+          infrastructureDefinitions:
+          - identifier: "sshinfra"
+        execution:
+          steps:
+          - step:
+              type: "ShellScript"
+              name: "ShellScript_1"
+              identifier: "ShellScript_1"
+              spec:
+                shell: "PowerShell"
+                source:
+                  type: "Inline"
+                  spec:
+                    script: "echo hi"
+                environmentVariables: []
+                outputVariables: []
+                executionTarget: {}
+              timeout: "10m"
+          rollbackSteps: []
+      tags: {}
+      failureStrategies:
+      - onFailure:
+          errors:
+          - "AllErrors"
+          action:
+            type: "StageRollback"
+  variables:
+  - name: "test99"
+    type: "String"
+    description: ""
+    required: false
+    value: "<+input>"
+  - name: "ping"
+    type: "String"
+    description: ""
+    required: false
+    value: "1234"
+  flowControl:
+    barriers:
+    - name: "test"
+      identifier: "test"
+  notificationRules:
+  - name: "repro"
+    identifier: "repro"
+    pipelineEvents:
+    - type: "AllEvents"
+    notificationMethod:
+      type: "Webhook"
+      spec:
+        webhookUrl: "https://hooks.slack.com/services/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"
+        headers:
+          api-key: "<+pipeline.variables.ping>"
+    enabled: true
+  identifier: "reproinvenco_Clone"
+  name: "repro-invenco - Clone"
