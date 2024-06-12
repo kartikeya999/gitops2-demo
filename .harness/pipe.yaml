@@ -4,6 +4,7 @@ pipeline:
   tags: {}
   template:
     templateRef: account.pipebranch
-    versionLabel: v1
+    versionLabel: v2
+    gitBranch: repro11
   projectIdentifier: CSETest1
   orgIdentifier: kartikeyaorganization
