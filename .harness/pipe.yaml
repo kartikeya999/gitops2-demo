@@ -1,0 +1,9 @@
+pipeline:
+  name: pipe
+  identifier: pipe
+  tags: {}
+  template:
+    templateRef: account.pipebranch
+    versionLabel: v1
+  projectIdentifier: CSETest1
+  orgIdentifier: kartikeyaorganization
