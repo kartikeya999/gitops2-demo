@@ -1,0 +1,16 @@
+template:
+  name: http
+  identifier: http
+  versionLabel: v1
+  type: Step
+  tags: {}
+  spec:
+    type: Http
+    timeout: 10s
+    spec:
+      url: https://www.google.com/
+      method: GET
+      headers: []
+      inputVariables: []
+      outputVariables: []
+      requestBody: text
