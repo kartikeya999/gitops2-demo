@@ -13,4 +13,4 @@ template:
       headers: []
       inputVariables: []
       outputVariables: []
-      requestBody: "{ \"orgldentifier\": \"<+org.identifier>\",\"projectidentifier\":<+pipeline.variables.APM_ID>\", \"identifier\": \"PRD01\"}"
+      requestBody: <+input>
