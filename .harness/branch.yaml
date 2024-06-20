@@ -24,7 +24,7 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: echo "<+infra.connector.name>-delegate-ng"
+                        script: echo "<+infra.connector.name>-test"
                     environmentVariables: []
                     outputVariables: []
                     executionTarget: {}
