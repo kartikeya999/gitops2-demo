@@ -1,0 +1,13 @@
+infrastructureDefinition:
+  name: k8s
+  identifier: k8s
+  orgIdentifier: kartikeyaorganization
+  projectIdentifier: CSETest1
+  environmentRef: delegate
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: account.k8s
+    namespace: default
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: true
