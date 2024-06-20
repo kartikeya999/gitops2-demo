@@ -50,7 +50,7 @@ pipeline:
               - identifier: k8s
         tags: {}
         delegateSelectors:
-          - <+infra.connector.name>-delegate-ng
+          - <+infra.connector.name>-test
   variables:
     - name: test
       type: String
