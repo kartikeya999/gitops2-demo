@@ -24,12 +24,33 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: echo hi
+                        script: echo "<+infra.connector.name>-delegate-ng"
                     environmentVariables: []
                     outputVariables: []
                     executionTarget: {}
                   timeout: 10m
+              - step:
+                  type: ShellScript
+                  name: ShellScript_2
+                  identifier: ShellScript_2
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: echo test
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+          environment:
+            environmentRef: delegate
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: k8s
         tags: {}
+        delegateSelectors:
+          - <+infra.connector.name>-delegate-ng
   variables:
     - name: test
       type: String
