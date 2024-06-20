@@ -43,6 +43,55 @@ pipeline:
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
+              - stepGroup:
+                  name: test
+                  identifier: test
+                  steps:
+                    - parallel:
+                        - step:
+                            type: ShellScript
+                            name: ShellScript_3
+                            identifier: ShellScript_3
+                            spec:
+                              shell: Bash
+                              executionTarget: {}
+                              source:
+                                type: Inline
+                                spec:
+                                  script: |-
+                                    echo hi
+                                    echo <+matrix.listOfString>
+                              environmentVariables: []
+                              outputVariables: []
+                            timeout: 10m
+                        - step:
+                            type: ShellScript
+                            name: ShellScript_4
+                            identifier: ShellScript_4
+                            spec:
+                              shell: Bash
+                              executionTarget: {}
+                              source:
+                                type: Inline
+                                spec:
+                                  script: echo hi2
+                              environmentVariables: []
+                              outputVariables: []
+                            timeout: 10m
+                    - step:
+                        type: ShellScript
+                        name: ShellScript_5
+                        identifier: ShellScript_5
+                        spec:
+                          shell: Bash
+                          executionTarget: {}
+                          source:
+                            type: Inline
+                            spec:
+                              script: echo hi3
+                          environmentVariables: []
+                          outputVariables: []
+                        timeout: 10m
           environment:
             environmentRef: delegate
             deployToAll: false
@@ -51,6 +100,12 @@ pipeline:
         tags: {}
         delegateSelectors:
           - <+infra.connector.name>-test
+        strategy:
+          matrix:
+            listOfString:
+              - a
+              - b
+              - c
   variables:
     - name: test
       type: String
