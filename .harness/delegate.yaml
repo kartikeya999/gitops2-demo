@@ -1,0 +1,6 @@
+environment:
+  name: delegate
+  identifier: delegate
+  orgIdentifier: kartikeyaorganization
+  projectIdentifier: CSETest1
+  type: Production
