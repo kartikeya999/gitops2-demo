@@ -39,7 +39,9 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: echo test
+                        script: |-
+                          echo test
+                          echo <+stage.delegateSelectors>
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
@@ -61,6 +63,7 @@ pipeline:
                                   script: |-
                                     echo hi
                                     echo <+matrix.listOfString>
+                                    echo <+stage.delegateSelectors>
                               environmentVariables: []
                               outputVariables: []
                             timeout: 10m
@@ -74,7 +77,9 @@ pipeline:
                               source:
                                 type: Inline
                                 spec:
-                                  script: echo hi2
+                                  script: |-
+                                    echo hi2
+                                    echo <+stage.delegateSelectors>
                               environmentVariables: []
                               outputVariables: []
                             timeout: 10m
@@ -88,7 +93,9 @@ pipeline:
                           source:
                             type: Inline
                             spec:
-                              script: echo hi3
+                              script: |-
+                                echo hi3
+                                echo <+stage.delegateSelectors>
                           environmentVariables: []
                           outputVariables: []
                         timeout: 10m
