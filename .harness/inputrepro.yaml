@@ -1,0 +1,11 @@
+inputSet:
+  name: inputrepro
+  identifier: inputrepro
+  orgIdentifier: kartikeyaorganization
+  projectIdentifier: CSETest1
+  pipeline:
+    identifier: branch
+    variables:
+      - name: test
+        type: String
+        value: <+input>
