@@ -118,4 +118,4 @@ pipeline:
       type: String
       description: ""
       required: false
-      value: "true"
+      value: <+input>
