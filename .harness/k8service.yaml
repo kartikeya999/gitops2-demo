@@ -1,0 +1,5 @@
+service:
+  name: "k8service"
+  identifier: "k8service"
+  tags: {}
+  gitOpsEnabled: false
