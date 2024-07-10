@@ -1,0 +1,54 @@
+service:
+  name: k8s-value
+  identifier: k8svalue
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      manifests:
+        - manifest:
+            identifier: k8s
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: account.GitHub
+                  gitFetchType: Branch
+                  paths:
+                    - templates
+                  repoName: k8s-remote-manifest
+                  branch: main
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+        - manifest:
+            identifier: valuek8s
+            type: Values
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: account.GitHub
+                  gitFetchType: Branch
+                  paths:
+                    - values.yaml
+                  repoName: k8s-remote-manifest
+                  branch: main
+      variables:
+        - name: aVar
+          type: String
+          description: ""
+          required: false
+          value: <+input>
+        - name: bVar
+          type: String
+          description: ""
+          required: false
+          value: b-<+serviceVariables.aVar>
+        - name: cVar
+          type: String
+          description: ""
+          required: false
+          value: c-<+serviceVariables.aVar>
+      artifacts:
+        primary: {}
+  gitOpsEnabled: false
