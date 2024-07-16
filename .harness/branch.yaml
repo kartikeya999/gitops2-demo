@@ -121,12 +121,6 @@ pipeline:
             infrastructureDefinitions:
               - identifier: k8s
         tags: {}
-        strategy:
-          matrix:
-            listOfString:
-              - a
-              - b
-              - c
         variables:
           - name: module
             type: String
