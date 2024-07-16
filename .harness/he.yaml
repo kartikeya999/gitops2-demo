@@ -1,0 +1,36 @@
+service:
+  name: helm-svc-latest
+  identifier: helmsvclatest
+  serviceDefinition:
+    type: Kubernetes
+    spec:
+      manifests:
+        - manifest:
+            identifier: latest
+            type: HelmChart
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: account.GitHub
+                  gitFetchType: Branch
+                  folderPath: charts/buildachart
+                  repoName: helm-charts-ng
+                  branch: main
+              subChartPath: ""
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+              helmVersion: V3
+              fetchHelmChartMetadata: false
+        - manifest:
+            identifier: val
+            type: Values
+            spec:
+              store:
+                type: Harness
+                spec:
+                  files:
+                    - /value.yaml
+  gitOpsEnabled: false
+  orgIdentifier: kartikeyaorganization
+  projectIdentifier: CSETest1
