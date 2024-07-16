@@ -40,7 +40,7 @@ pipeline:
                     approvers:
                       userGroups:
                         - _project_all_users
-                        - <+ <+stage.variables.module> == "testuser"?"test2":"_project_all_users">
+                        - <+ <+stage.variables.module> == "testuser"?"account.test2":"_project_all_users">
                       minimumCount: 1
                       disallowPipelineExecutor: false
                     approverInputs: []
