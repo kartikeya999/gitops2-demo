@@ -22,15 +22,6 @@ service:
               enableDeclarativeRollback: false
               helmVersion: V3
               fetchHelmChartMetadata: false
-        - manifest:
-            identifier: val
-            type: Values
-            spec:
-              store:
-                type: Harness
-                spec:
-                  files:
-                    - /value.yaml
   gitOpsEnabled: false
   orgIdentifier: kartikeyaorganization
   projectIdentifier: CSETest1
