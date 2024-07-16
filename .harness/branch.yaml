@@ -126,7 +126,7 @@ pipeline:
             type: String
             description: ""
             required: false
-            value: testuser
+            value: <+input>
   variables:
     - name: test
       type: String
