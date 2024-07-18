@@ -26,6 +26,8 @@ pipeline:
                       type: Inline
                       spec:
                         script: |-
+                          rm -r *
+
                           touch zipp.txt
 
                           tar -cvzf zipr.tgz zipp.txt
