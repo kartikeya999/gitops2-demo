@@ -17,6 +17,27 @@ pipeline:
             steps:
               - step:
                   type: ShellScript
+                  name: ShellScript_6
+                  identifier: ShellScript_6
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: |-
+                          touch zipp.txt
+
+                          tar -cvzf zipr.tgz zipp.txt
+
+                          ls
+
+                          tar -xvzf zipr.tgz
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+              - step:
+                  type: ShellScript
                   name: ShellScript_1
                   identifier: ShellScript_1
                   spec:
