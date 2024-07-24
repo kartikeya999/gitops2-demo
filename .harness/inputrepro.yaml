@@ -1,10 +1,38 @@
 inputSet:
   name: inputrepro
+  tags: {}
   identifier: inputrepro
   orgIdentifier: kartikeyaorganization
   projectIdentifier: CSETest1
   pipeline:
     identifier: branch
+    stages:
+      - stage:
+          identifier: test
+          type: Deployment
+          spec:
+            execution:
+              steps:
+                - stepGroup:
+                    identifier: serverless_step_group
+                    stepGroupInfra:
+                      type: KubernetesDirect
+                      spec:
+                        connectorRef: account.k8s
+              rollbackSteps:
+                - stepGroup:
+                    identifier: serverless_rollback_step_group
+                    stepGroupInfra:
+                      type: KubernetesDirect
+                      spec:
+                        connectorRef: account.k8s
+      - stage:
+          identifier: branch
+          type: Custom
+          variables:
+            - name: module
+              type: String
+              value: <+input>
     variables:
       - name: test
         type: String
