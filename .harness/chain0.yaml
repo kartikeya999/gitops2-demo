@@ -1,5 +1,6 @@
 inputSet:
   name: chain0
+  tags: {}
   identifier: chain0
   orgIdentifier: kartikeyaorganization
   projectIdentifier: CSETest1
@@ -7,22 +8,32 @@ inputSet:
     identifier: branch
     stages:
       - stage:
-          identifier: chain0
-          type: Pipeline
+          identifier: test
+          type: Deployment
           spec:
-            inputs:
-              identifier: k8srepro
-              stages:
-                - stage:
-                    identifier: k8s
-                    type: Deployment
-                    spec:
-                      service:
-                        serviceInputs:
-                          serviceDefinition:
-                            type: Kubernetes
-                            spec:
-                              artifacts:
-                                primary:
-                                  primaryArtifactRef: <+input>
-                                  sources: <+input>
+            execution:
+              steps:
+                - stepGroup:
+                    identifier: serverless_step_group
+                    stepGroupInfra:
+                      type: KubernetesDirect
+                      spec:
+                        connectorRef: <+input>
+              rollbackSteps:
+                - stepGroup:
+                    identifier: serverless_rollback_step_group
+                    stepGroupInfra:
+                      type: KubernetesDirect
+                      spec:
+                        connectorRef: <+input>
+      - stage:
+          identifier: branch
+          type: Custom
+          variables:
+            - name: module
+              type: String
+              value: <+input>
+    variables:
+      - name: test
+        type: String
+        value: kartik
