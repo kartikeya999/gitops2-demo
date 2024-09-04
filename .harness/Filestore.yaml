@@ -29,5 +29,6 @@ pipeline:
                   spec:
                     shell: Sh
                     command: |-
-                      fileStore.getAsString("run.txt")
+                      test=fileStore.getAsString("run.txt")
+                      echo $test
                       cat run.txt
