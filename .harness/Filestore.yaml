@@ -28,7 +28,7 @@ pipeline:
                   identifier: Background_1
                   spec:
                     connectorRef: account.harnessImage
-                    image: hypertrace/kafka-zookeeper:latest
+                    image: hypertrace/kafka-zookeeper:0.2.3
                     shell: Sh
               - step:
                   type: Run
