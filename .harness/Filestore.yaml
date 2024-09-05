@@ -30,6 +30,9 @@ pipeline:
                     connectorRef: account.harnessImage
                     image: hypertrace/kafka-zookeeper:0.2.3
                     shell: Sh
+                    command: |-
+                      mkdir -p ./config  # Create the config directory
+                      touch ./config/server.properties  # Create the server.properties file if necessary
                     imagePullPolicy: Always
                     runAsUser: "0"
               - step:
