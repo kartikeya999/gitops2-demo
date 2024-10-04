@@ -36,4 +36,4 @@ inputSet:
     variables:
       - name: test
         type: String
-        value: <+input>
+        value: 1test
