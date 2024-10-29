@@ -1,0 +1,8 @@
+environment:
+  name: Multi-infra
+  identifier: Multiinfra
+  description: ""
+  tags: {}
+  type: Production
+  orgIdentifier: kartikeyaorganization
+  projectIdentifier: CSETest1
