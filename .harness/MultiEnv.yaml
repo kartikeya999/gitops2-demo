@@ -28,8 +28,13 @@ pipeline:
             values:
               - environmentRef: Multiinfra
                 gitBranch: main
-                deployToAll: true
-                infrastructureDefinitions: <+input>
+                deployToAll: false
+                infrastructureDefinitions:
+                  - identifier: infra1
+              - environmentRef: Newenv
+                deployToAll: false
+                infrastructureDefinitions:
+                  - identifier: env
           execution:
             steps:
               - step:
