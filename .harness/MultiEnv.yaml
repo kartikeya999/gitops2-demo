@@ -1,0 +1,77 @@
+pipeline:
+  name: Multi-Env
+  identifier: MultiEnv
+  projectIdentifier: CSETest1
+  orgIdentifier: kartikeyaorganization
+  tags: {}
+  stages:
+    - stage:
+        name: Multi-env
+        identifier: Multienv
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Ssh
+          service:
+            serviceRef: sshservice
+            serviceInputs:
+              serviceDefinition:
+                type: Ssh
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environments:
+            metadata:
+              parallel: true
+            values:
+              - environmentRef: Multiinfra
+                gitBranch: main
+                deployToAll: true
+                infrastructureDefinitions: <+input>
+          execution:
+            steps:
+              - step:
+                  name: Deploy
+                  identifier: Deploy
+                  template:
+                    templateRef: account.Default_Install_Jar_Bash
+                    versionLabel: v1
+                    templateInputs:
+                      type: Command
+                      spec:
+                        environmentVariables:
+                          - name: DestinationDirectory
+                            type: String
+                            value: $HOME/<+service.name>/<+env.name>
+                          - name: WorkingDirectory
+                            type: String
+                            value: $HOME/<+service.name>/<+env.name>/tomcat/bin
+            rollbackSteps:
+              - step:
+                  name: Rollback
+                  identifier: Rollback
+                  timeout: 10m
+                  strategy:
+                    repeat:
+                      items: <+stage.output.hosts>
+                  template:
+                    templateRef: account.Default_Install_Jar_Bash
+                    templateInputs:
+                      type: Command
+                      spec:
+                        environmentVariables:
+                          - name: DestinationDirectory
+                            type: String
+                            value: $HOME/<+service.name>/<+env.name>
+                          - name: WorkingDirectory
+                            type: String
+                            value: $HOME/<+service.name>/<+env.name>/tomcat/bin
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
