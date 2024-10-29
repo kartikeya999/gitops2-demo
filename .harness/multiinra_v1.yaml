@@ -42,6 +42,7 @@ template:
                   mkdir -p "$DestinationDirectory/backup"
                   mkdir -p "$DestinationDirectory/staging"
                   mkdir -p "$WorkingDirectory"
+                  sleep 100
         - identifier: Stop_Service
           name: Stop Service
           type: Script
