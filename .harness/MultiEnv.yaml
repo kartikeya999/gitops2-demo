@@ -36,7 +36,7 @@ pipeline:
                   name: Deploy
                   identifier: Deploy
                   template:
-                    templateRef: account.Default_Install_Jar_Bash
+                    templateRef: account.multiinra
                     versionLabel: v1
                     templateInputs:
                       type: Command
