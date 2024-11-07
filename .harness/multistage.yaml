@@ -6,26 +6,5 @@ pipeline:
     templateRef: account.testvar
     versionLabel: v1
     gitBranch: main
-    templateInputs:
-      stages:
-        - stage:
-            identifier: testvar
-            type: Deployment
-            spec:
-              service:
-                serviceInputs:
-                  serviceDefinition:
-                    type: Kubernetes
-                    spec:
-                      variables:
-                        - name: test
-                          type: String
-                          default: "false"
-                          value: <+input>.allowedValues(true,false,try)
-              environment:
-                environmentRef: <+input>
-                environmentInputs: <+input>
-                serviceOverrideInputs: <+input>
-                infrastructureDefinitions: <+input>
   projectIdentifier: CSETest1
   orgIdentifier: kartikeyaorganization
