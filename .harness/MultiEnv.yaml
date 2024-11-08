@@ -51,6 +51,8 @@ pipeline:
                                 echo <+execution.steps.ShellScript_1.output.outputVariables.parentvar>
 
                                 echo <+stepGroup.identifier>
+
+                                echo <+stepGroup.steps.ShellScript_1.output.outputVariables.parentvar>
                           environmentVariables: []
                           outputVariables: []
                         timeout: 10m
