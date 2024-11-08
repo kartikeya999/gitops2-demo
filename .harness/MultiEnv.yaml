@@ -80,8 +80,11 @@ pipeline:
                                       echo <+execution.steps.<+stepGroup.identifier>.steps.ShellScript_1.output.outputVariables.parentvar>
 
 
-
+                                      echo test
                                       echo <+stepGroup.getParentStepGroup>
+
+                                      echo test2
+                                      echo <+stepGroup.variables>
                                 environmentVariables: []
                                 outputVariables: []
                               timeout: 10m
