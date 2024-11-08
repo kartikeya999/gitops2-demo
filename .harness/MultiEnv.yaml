@@ -70,10 +70,19 @@ pipeline:
                                 source:
                                   type: Inline
                                   spec:
-                                    script: echo hi
+                                    script: |-
+                                      echo <+execution.steps.parent.steps.child.variables.childvar>
+                                      echo break
+                                      echo <+stepGroup.steps.child.variables.childvar>
                                 environmentVariables: []
                                 outputVariables: []
                               timeout: 10m
+                        variables:
+                          - name: childvar
+                            type: String
+                            value: <+stepGroup.steps.ShellScript_1.output.outputVariables.parentvar>
+                            description: ""
+                            required: false
             rollbackSteps: []
           serviceDependencies: []
         tags: {}
