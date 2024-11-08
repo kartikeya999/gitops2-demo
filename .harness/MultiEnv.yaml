@@ -32,6 +32,52 @@ pipeline:
                 infrastructureDefinitions: <+input>
           execution:
             steps:
+              - stepGroup:
+                  name: parent
+                  identifier: parent
+                  steps:
+                    - step:
+                        type: Run
+                        name: Run_1
+                        identifier: Run_1
+                        spec:
+                          connectorRef: account.harnessImage
+                          image: nginx
+                          shell: Sh
+                          command: echo hi
+                          outputVariables:
+                            - name: parentvar
+                              type: String
+                              value: test
+                    - stepGroup:
+                        name: child
+                        identifier: child
+                        steps:
+                          - step:
+                              type: ShellScript
+                              name: ShellScript_1
+                              identifier: ShellScript_1
+                              spec:
+                                shell: Bash
+                                executionTarget: {}
+                                source:
+                                  type: Inline
+                                  spec:
+                                    script: <+execution.steps.parent.steps.child.variables.childvar>
+                                environmentVariables: []
+                                outputVariables: []
+                              timeout: 10m
+                        variables: []
+                  stepGroupInfra:
+                    type: KubernetesDirect
+                    spec:
+                      connectorRef: account.k8s
+                  variables:
+                    - name: test
+                      type: String
+                      value: "123"
+                      description: ""
+                      required: false
               - step:
                   name: Deploy
                   identifier: Deploy
