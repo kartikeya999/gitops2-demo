@@ -77,7 +77,7 @@ pipeline:
                                       echo break
                                       echo <+stepGroup.steps.child.variables.childvar>
                                       echo break
-                                      echo <+execution.steps.<+stepGroup.Identifier>.steps.ShellScript_1.output.outputVariables.parentvar>
+                                      echo <+execution.steps.<+stepGroup.identifier>.steps.ShellScript_1.output.outputVariables.parentvar>
                                 environmentVariables: []
                                 outputVariables: []
                               timeout: 10m
