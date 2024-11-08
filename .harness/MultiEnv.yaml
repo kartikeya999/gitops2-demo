@@ -6,6 +6,58 @@ pipeline:
   tags: {}
   stages:
     - stage:
+        name: test
+        identifier: test
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - stepGroup:
+                  name: parent
+                  identifier: parent
+                  steps:
+                    - step:
+                        type: ShellScript
+                        name: ShellScript_1
+                        identifier: ShellScript_1
+                        spec:
+                          shell: Bash
+                          executionTarget: {}
+                          source:
+                            type: Inline
+                            spec:
+                              script: |-
+                                echo hi
+                                parentvar="123"
+                          environmentVariables: []
+                          outputVariables:
+                            - name: parentvar
+                              type: String
+                              value: parentvar
+                        timeout: 10m
+                    - stepGroup:
+                        name: child
+                        identifier: child
+                        steps:
+                          - step:
+                              type: ShellScript
+                              name: ShellScript_2
+                              identifier: ShellScript_2
+                              spec:
+                                shell: Bash
+                                executionTarget: {}
+                                source:
+                                  type: Inline
+                                  spec:
+                                    script: echo hi
+                                environmentVariables: []
+                                outputVariables: []
+                              timeout: 10m
+            rollbackSteps: []
+          serviceDependencies: []
+        tags: {}
+    - stage:
         name: Multi-env
         identifier: Multienv
         description: ""
