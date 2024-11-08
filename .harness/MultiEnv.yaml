@@ -91,7 +91,7 @@ pipeline:
                         variables:
                           - name: childvar
                             type: String
-                            value: <+stepGroup.steps.ShellScript_1.output.outputVariables.parentvar>
+                            value: <+execution.steps.<+stepGroup.identifier>.steps.ShellScript_1.output.outputVariables.parentvar>
                             description: ""
                             required: false
             rollbackSteps: []
