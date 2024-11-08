@@ -49,6 +49,8 @@ pipeline:
                               script: |-
                                 echo <+pipeline.stages.test.spec.execution.steps.parent.steps.ShellScript_1.output.outputVariables.parentvar>
                                 echo <+execution.steps.ShellScript_1.output.outputVariables.parentvar>
+
+                                echo <+stepGroup.identifier>
                           environmentVariables: []
                           outputVariables: []
                         timeout: 10m
