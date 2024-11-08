@@ -36,6 +36,22 @@ pipeline:
                               type: String
                               value: parentvar
                         timeout: 10m
+                    - step:
+                        type: ShellScript
+                        name: ShellScript_3
+                        identifier: ShellScript_3
+                        spec:
+                          shell: Bash
+                          executionTarget: {}
+                          source:
+                            type: Inline
+                            spec:
+                              script: |-
+                                echo <+pipeline.stages.test.spec.execution.steps.parent.steps.ShellScript_1.output.outputVariables.parentvar>
+                                echo <+execution.steps.ShellScript_1.output.outputVariables.parentvar>
+                          environmentVariables: []
+                          outputVariables: []
+                        timeout: 10m
                     - stepGroup:
                         name: child
                         identifier: child
