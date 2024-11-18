@@ -213,16 +213,4 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
-    - stage:
-        name: child
-        identifier: child
-        description: ""
-        type: Pipeline
-        spec:
-          org: kartikeyaorganization
-          pipeline: k8srepro
-          project: CSETest1
-          inputSetReferences:
-            - test2
-        tags: {}
   allowStageExecutions: true
