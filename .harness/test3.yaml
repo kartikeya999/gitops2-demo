@@ -1,0 +1,26 @@
+inputSet:
+  name: test3
+  identifier: test3
+  orgIdentifier: kartikeyaorganization
+  projectIdentifier: CSETest1
+  pipeline:
+    identifier: MultiEnv
+    stages:
+      - stage:
+          identifier: Multienv
+          type: Deployment
+          spec:
+            service:
+              serviceInputs:
+                serviceDefinition:
+                  type: Ssh
+                  spec:
+                    artifacts:
+                      primary:
+                        primaryArtifactRef: test
+            environments:
+              values:
+                - environmentRef: Multiinfra
+                  infrastructureDefinitions:
+                    - identifier: infra2
+                    - identifier: infra1
