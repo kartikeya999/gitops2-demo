@@ -42,6 +42,11 @@ pipeline:
                     type: KubernetesDirect
                     spec:
                       connectorRef: account.k8s
+                      containerSecurityContext:
+                        privileged: true
+                  sharedPaths:
+                    - /var/run
+                    - /var/lib/docker
               - step:
                   type: ShellScript
                   name: ShellScript_1
