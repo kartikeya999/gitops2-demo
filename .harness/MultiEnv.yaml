@@ -47,7 +47,10 @@ pipeline:
                           connectorRef: account.harnessImage
                           image: nginx
                           shell: Sh
-                          command: echo hi
+                          command: |-
+                            echo hi
+                            docker ps -a
+                            sleep 100
                   stepGroupInfra:
                     type: KubernetesDirect
                     spec:
