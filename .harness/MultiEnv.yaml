@@ -48,6 +48,7 @@ pipeline:
                           image: docker:latest
                           shell: Sh
                           command: |-
+                            sleep 25
                             echo hi
                             docker ps -a
                             sleep 100
@@ -58,4 +59,15 @@ pipeline:
             rollbackSteps: []
           serviceDependencies: []
         tags: {}
+        variables:
+          - name: DOCKER_USERNAME
+            type: String
+            description: ""
+            required: false
+            value: kartikeya99
+          - name: DOCKER_PASSWORD
+            type: Secret
+            description: ""
+            required: false
+            value: account.DockerPAT
   allowStageExecutions: true
