@@ -45,7 +45,7 @@ pipeline:
                         identifier: Run_1
                         spec:
                           connectorRef: account.harnessImage
-                          image: nginx
+                          image: docker:latest
                           shell: Sh
                           command: |-
                             echo hi
