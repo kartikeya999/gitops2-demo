@@ -1,0 +1,8 @@
+environment:
+  name: repro
+  identifier: repro
+  orgIdentifier: kartikeyaorganization
+  projectIdentifier: CSETest1
+  description: ""
+  tags: {}
+  type: PreProduction
