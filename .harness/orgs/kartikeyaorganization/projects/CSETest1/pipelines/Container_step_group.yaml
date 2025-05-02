@@ -30,6 +30,8 @@ pipeline:
                     type: KubernetesDirect
                     spec:
                       connectorRef: account.k8s
+                      containerSecurityContext:
+                        runAsNonRoot: true
             rollbackSteps: []
           serviceDependencies: []
         tags: {}
