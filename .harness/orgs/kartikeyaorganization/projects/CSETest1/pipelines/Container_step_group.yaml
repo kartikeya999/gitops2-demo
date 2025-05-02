@@ -1,0 +1,35 @@
+pipeline:
+  name: Container step group
+  identifier: Container_step_group
+  projectIdentifier: CSETest1
+  orgIdentifier: kartikeyaorganization
+  tags: {}
+  stages:
+    - stage:
+        name: container
+        identifier: container
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - stepGroup:
+                  name: group
+                  identifier: group
+                  steps:
+                    - step:
+                        type: Run
+                        name: Run_1
+                        identifier: Run_1
+                        spec:
+                          connectorRef: account.harnessImage
+                          image: aws-cli:2.15.1
+                          shell: Bash
+                          command: pwd
+                  stepGroupInfra:
+                    type: KubernetesDirect
+                    spec:
+                      connectorRef: account.k8s
+            rollbackSteps: []
+          serviceDependencies: []
+        tags: {}
