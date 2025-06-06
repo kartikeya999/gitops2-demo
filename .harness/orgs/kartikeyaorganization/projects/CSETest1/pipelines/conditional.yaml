@@ -8,9 +8,6 @@ pipeline:
     - stage:
         name: condition
         identifier: condition
-        when:
-          pipelineStatus: Success
-          condition: <+pipeline.variables.DeployUAE>="true"
         tags: {}
         template:
           templateRef: account.save
