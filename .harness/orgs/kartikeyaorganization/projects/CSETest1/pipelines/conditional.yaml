@@ -4,6 +4,9 @@ pipeline:
   projectIdentifier: CSETest1
   orgIdentifier: kartikeyaorganization
   tags: {}
+  when:
+    pipelineStatus: Success
+    condition: <+pipeline.variables.DeployUAE>="true"
   stages:
     - stage:
         name: condition
