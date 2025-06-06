@@ -105,6 +105,7 @@ pipeline:
                     type: KubernetesDirect
                     spec:
                       connectorRef: account.k8s
+                      namespace: kartikeya-ng
             rollbackSteps: []
         tags: {}
         failureStrategies:
