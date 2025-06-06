@@ -54,3 +54,62 @@ pipeline:
             rollbackSteps: []
           serviceDependencies: []
         tags: {}
+    - stage:
+        name: git
+        identifier: git
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: k8s
+            serviceInputs:
+              serviceDefinition:
+                type: Kubernetes
+                spec:
+                  manifests:
+                    - manifest:
+                        identifier: values
+                        type: Values
+                        spec:
+                          store:
+                            type: Github
+                            spec:
+                              branch: <+input>
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            environmentRef: env
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: prod
+          execution:
+            steps:
+              - stepGroup:
+                  name: git
+                  identifier: git
+                  steps:
+                    - step:
+                        type: GitClone
+                        name: GitClone_1
+                        identifier: GitClone_1
+                        spec:
+                          repoName: CI-Testcase
+                          build:
+                            type: branch
+                            spec:
+                              branch: main
+                  stepGroupInfra:
+                    type: KubernetesDirect
+                    spec:
+                      connectorRef: account.k8s
+            rollbackSteps: []
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
