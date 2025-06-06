@@ -14,6 +14,17 @@ pipeline:
           execution:
             steps:
               - stepGroup:
+                  name: temp2
+                  identifier: temp2
+                  template:
+                    templateRef: account.temp1
+                    versionLabel: v1
+                    templateInputs:
+                      variables:
+                        - name: terraformPluginIdentifier
+                          type: String
+                          value: <+input>
+              - stepGroup:
                   name: test
                   identifier: test
                   steps:
@@ -31,7 +42,7 @@ pipeline:
                           environmentVariables:
                             - name: terraformJsonFilePath
                               type: String
-                              value: <+<+execution.steps.<+stepGroup.variables.terraformPluginIdentifier>.plan.jsonFilePath>>
+                              value: <+<+execution.steps.<+stepGroup.variables.tfplan>.plan.jsonFilePath>>
                           outputVariables: []
                         timeout: 10m
                   variables:
