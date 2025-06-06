@@ -6,20 +6,37 @@ pipeline:
   tags: {}
   stages:
     - stage:
-        name: condition
-        identifier: condition
+        name: test
+        identifier: test
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - stepGroup:
+                  name: test
+                  identifier: test
+                  steps:
+                    - step:
+                        type: ShellScript
+                        name: ShellScript_1
+                        identifier: ShellScript_1
+                        spec:
+                          shell: Bash
+                          executionTarget: {}
+                          source:
+                            type: Inline
+                            spec:
+                              script: echo <+execution.steps.<+stepGroup.variables.tfplan>.plan.jsonFilePath>
+                          environmentVariables: []
+                          outputVariables: []
+                        timeout: 10m
+                  variables:
+                    - name: tfplan
+                      type: String
+                      value: tfplan
+                      description: ""
+                      required: false
+            rollbackSteps: []
+          serviceDependencies: []
         tags: {}
-        template:
-          templateRef: account.save
-          versionLabel: v1
-          templateInputs:
-            type: Deployment
-            spec:
-              environment:
-                environmentRef: <+input>
-                environmentInputs: <+input>
-                serviceOverrideInputs: <+input>
-                infrastructureDefinitions: <+input>
-              service:
-                serviceRef: <+input>
-                serviceInputs: <+input>
