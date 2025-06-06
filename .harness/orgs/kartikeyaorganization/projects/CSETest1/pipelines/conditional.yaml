@@ -28,7 +28,10 @@ pipeline:
                             type: Inline
                             spec:
                               script: echo <+<+execution.steps.<+stepGroup.variables.tfplan>.plan.jsonFilePath>>
-                          environmentVariables: []
+                          environmentVariables:
+                            - name: terraformJsonFilePath
+                              type: String
+                              value: <+<+execution.steps.<+stepGroup.variables.terraformPluginIdentifier>.plan.jsonFilePath>>
                           outputVariables: []
                         timeout: 10m
                   variables:
