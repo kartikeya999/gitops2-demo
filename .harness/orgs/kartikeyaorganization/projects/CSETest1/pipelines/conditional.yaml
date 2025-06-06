@@ -34,7 +34,7 @@ pipeline:
                   variables:
                     - name: tfplan
                       type: String
-                      value: tfplan
+                      value: hi
                       description: ""
                       required: false
             rollbackSteps: []
