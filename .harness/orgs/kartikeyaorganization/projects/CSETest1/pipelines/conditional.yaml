@@ -27,14 +27,14 @@ pipeline:
                           source:
                             type: Inline
                             spec:
-                              script: echo <+execution.steps.<+stepGroup.variables.tfplan>.plan.jsonFilePath>
+                              script: echo <+<+execution.steps.<+stepGroup.variables.tfplan>.plan.jsonFilePath>>
                           environmentVariables: []
                           outputVariables: []
                         timeout: 10m
                   variables:
                     - name: tfplan
                       type: String
-                      value: hi
+                      value: <+input>
                       description: ""
                       required: false
             rollbackSteps: []
