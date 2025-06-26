@@ -72,9 +72,9 @@ pipeline:
         failureStrategies:
           - onFailure:
               errors:
-                - AllErrors
+                - UserMarkedFailure
               action:
-                type: MarkAsFailure
+                type: Abort
     - stage:
         name: git
         identifier: git
