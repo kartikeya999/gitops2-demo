@@ -74,7 +74,7 @@ pipeline:
               errors:
                 - UserMarkedFailure
               action:
-                type: Abort
+                type: MarkAsFailure
     - stage:
         name: git
         identifier: git
