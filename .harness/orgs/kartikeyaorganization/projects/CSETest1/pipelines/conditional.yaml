@@ -54,6 +54,12 @@ pipeline:
             rollbackSteps: []
           serviceDependencies: []
         tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: MarkAsFailure
     - stage:
         name: git
         identifier: git
