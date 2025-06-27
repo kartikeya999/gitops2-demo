@@ -20,13 +20,13 @@ inputSet:
                         variables:
                           - name: terraformPluginIdentifier
                             type: String
-                            value: "1234"
+                            value: "12345"
                 - stepGroup:
                     identifier: test
                     variables:
                       - name: tfplan
                         type: String
-                        value: "4567"
+                        value: "45678"
       - stage:
           identifier: git
           type: Deployment
