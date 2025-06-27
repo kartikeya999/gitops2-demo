@@ -1,0 +1,49 @@
+inputSet:
+  name: int
+  identifier: int
+  orgIdentifier: kartikeyaorganization
+  projectIdentifier: CSETest1
+  pipeline:
+    identifier: conditional
+    stages:
+      - stage:
+          identifier: test
+          type: Custom
+          spec:
+            execution:
+              steps:
+                - stepGroup:
+                    identifier: temp2
+                    template:
+                      templateInputs:
+                        variables:
+                          - name: terraformPluginIdentifier
+                            type: String
+                            value: "123"
+                - stepGroup:
+                    identifier: test
+                    variables:
+                      - name: tfplan
+                        type: String
+                        value: "456"
+      - stage:
+          identifier: git
+          type: Deployment
+          spec:
+            service:
+              serviceInputs:
+                serviceDefinition:
+                  type: Kubernetes
+                  spec:
+                    manifests:
+                      - manifest:
+                          identifier: values
+                          type: Values
+                          spec:
+                            store:
+                              type: Github
+                              spec:
+                                branch: main
+                    artifacts:
+                      primary:
+                        primaryArtifactRef: k8s
