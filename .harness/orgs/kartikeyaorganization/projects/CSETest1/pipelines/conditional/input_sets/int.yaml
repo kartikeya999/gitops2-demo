@@ -1,5 +1,6 @@
 inputSet:
   name: int
+  tags: {}
   identifier: int
   orgIdentifier: kartikeyaorganization
   projectIdentifier: CSETest1
