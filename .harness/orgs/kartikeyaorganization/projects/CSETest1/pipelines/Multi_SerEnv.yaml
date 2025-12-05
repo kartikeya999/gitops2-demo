@@ -1,0 +1,59 @@
+pipeline:
+  name: Multi SerEnv
+  identifier: Multi_SerEnv
+  projectIdentifier: CSETest1
+  orgIdentifier: kartikeyaorganization
+  tags: {}
+  stages:
+    - stage:
+        name: Multi
+        identifier: Multi
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          services:
+            values: <+input>
+            metadata:
+              parallel: true
+          environments:
+            metadata:
+              parallel: true
+            values:
+              - environmentRef: Multiinfra
+                deployToAll: true
+                infrastructureDefinitions: <+input>
+              - environmentRef: repro
+                filters:
+                  - identifier: test
+                    type: tags
+                    entities:
+                      - infrastructures
+                    spec:
+                      tags: infrastructure.tags.allowedService == <+service.tags.targetInfra>
+                      matchType: all
+          execution:
+            steps:
+              - step:
+                  name: Rollout Deployment
+                  identifier: rolloutDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+            rollbackSteps:
+              - step:
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
