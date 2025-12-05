@@ -1,0 +1,15 @@
+infrastructureDefinition:
+  name: K8s2
+  identifier: K8s2
+  tags:
+    allowedService: tempk8s
+  orgIdentifier: kartikeyaorganization
+  projectIdentifier: CSETest1
+  environmentRef: repro
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: account.k8s
+    namespace: kartikeya-ng
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: false
