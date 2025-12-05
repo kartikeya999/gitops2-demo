@@ -26,7 +26,7 @@ pipeline:
                 entities:
                   - infrastructures
                 spec:
-                  tags: infrastructure.tags.allowedService == <+service.tags.targetInfra>
+                  tags: "\"k8s\" == <+service.tags.targetInfra>"
                   matchType: all
           execution:
             steps:
