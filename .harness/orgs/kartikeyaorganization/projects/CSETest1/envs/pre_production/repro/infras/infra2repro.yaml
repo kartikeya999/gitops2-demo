@@ -1,6 +1,8 @@
 infrastructureDefinition:
   name: infra2repro
   identifier: infra2repro
+  tags:
+    hi: abc
   orgIdentifier: kartikeyaorganization
   projectIdentifier: CSETest1
   environmentRef: repro
