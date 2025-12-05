@@ -21,8 +21,14 @@ pipeline:
               parallel: true
             values:
               - environmentRef: Multiinfra
-                deployToAll: true
-                infrastructureDefinitions: <+input>
+                filters:
+                  - identifier: test1
+                    type: tags
+                    entities:
+                      - infrastructures
+                    spec:
+                      tags: infrastructure.tags.allowedService == <+service.tags.targetInfra>
+                      matchType: all
               - environmentRef: repro
                 filters:
                   - identifier: test
