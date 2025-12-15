@@ -14,7 +14,24 @@ pipeline:
           deploymentType: Kubernetes
           services:
             values:
-              - serviceRef: k8service
+              - serviceRef: k8s
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      manifests:
+                        - manifest:
+                            identifier: values
+                            type: Values
+                            spec:
+                              store:
+                                type: Github
+                                spec:
+                                  branch: <+input>
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: <+input>
+                          sources: <+input>
             metadata:
               parallel: true
           environments:
