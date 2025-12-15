@@ -34,7 +34,7 @@ pipeline:
                       - infrastructures
                     spec:
                       tags:
-                        allowed: <+pipeline.variables.tagFilter>
+                        allowedService: K8s1
                       matchType: all
           execution:
             steps:
