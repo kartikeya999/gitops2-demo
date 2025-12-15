@@ -2,8 +2,7 @@ infrastructureDefinition:
   name: K8s1
   identifier: K8s1
   tags:
-    allowedService: k8s
-    allowed: allowed
+    allowedService: K8s1
   orgIdentifier: kartikeyaorganization
   projectIdentifier: CSETest1
   environmentRef: Multiinfra
