@@ -28,7 +28,8 @@ pipeline:
                     entities:
                       - infrastructures
                     spec:
-                      tags: <+service.tags>
+                      tags:
+                        allowed: ""
                       matchType: any
           execution:
             steps:
