@@ -5,6 +5,10 @@ pipeline:
   orgIdentifier: kartikeyaorganization
   tags:
     ai_generated: "true"
+  variables:
+    - name: tagFilter
+      type: String
+      value: allowed
   stages:
     - stage:
         name: Multi
@@ -30,7 +34,7 @@ pipeline:
                       - infrastructures
                     spec:
                       tags:
-                        allowed: allowed
+                        allowed: <+pipeline.variables.tagFilter>
                       matchType: all
           execution:
             steps:
@@ -63,4 +67,4 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
-  description: This pipeline was updated by Harness AI on 2025-12-15 11:06:31 UTC by Shylaja Sundararajan.
+  description: This pipeline was updated by Harness AI on 2025-12-15 11:14:51 UTC by Shylaja Sundararajan.
