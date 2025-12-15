@@ -35,7 +35,7 @@ pipeline:
                     spec:
                       tags:
                         allowedService: K8s1
-                      matchType: all
+                      matchType: any
           execution:
             steps:
               - step:
