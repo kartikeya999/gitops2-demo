@@ -14,9 +14,9 @@ pipeline:
           deploymentType: Kubernetes
           services:
             values:
-              - serviceRef: tempk8s
+              - serviceRef: scope
             metadata:
-              parallel: true
+              parallel: false
           environments:
             metadata:
               parallel: true
