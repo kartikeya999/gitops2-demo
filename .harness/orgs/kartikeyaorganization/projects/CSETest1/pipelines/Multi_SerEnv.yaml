@@ -13,21 +13,17 @@ pipeline:
         spec:
           deploymentType: Kubernetes
           services:
-            values: <+input>
+            values:
+              - serviceRef: k8service
             metadata:
               parallel: true
           environments:
             metadata:
               parallel: true
-            values: <+input>
-            filters:
-              - identifier: test
-                type: tags
-                entities:
-                  - infrastructures
-                spec:
-                  tags: "\"k8s\" == <+service.tags.targetInfra>"
-                  matchType: all
+            values:
+              - environmentRef: Multiinfra
+                deployToAll: true
+                infrastructureDefinitions: <+input>
           execution:
             steps:
               - step:
