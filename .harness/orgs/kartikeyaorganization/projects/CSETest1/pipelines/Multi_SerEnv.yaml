@@ -33,7 +33,7 @@ pipeline:
                     entities:
                       - infrastructures
                     spec:
-                      tags: allowedService:<+pipeline.variables.tagFilter>
+                      tags: {}
                       matchType: any
           execution:
             steps:
