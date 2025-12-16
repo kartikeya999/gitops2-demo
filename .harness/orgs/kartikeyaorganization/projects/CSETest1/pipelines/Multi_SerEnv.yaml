@@ -33,8 +33,7 @@ pipeline:
                     entities:
                       - infrastructures
                     spec:
-                      tags:
-                        allowedService: K8s1
+                      tags: <+infrastructure.tags.allowedService> == <+service.tags.targetInfra>
                       matchType: any
           execution:
             steps:
