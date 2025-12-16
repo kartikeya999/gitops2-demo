@@ -8,7 +8,7 @@ pipeline:
   variables:
     - name: tagFilter
       type: String
-      value: allowed
+      value: scope
   stages:
     - stage:
         name: Multi
