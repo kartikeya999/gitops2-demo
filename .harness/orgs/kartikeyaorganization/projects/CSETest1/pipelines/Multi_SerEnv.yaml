@@ -33,7 +33,7 @@ pipeline:
                     entities:
                       - infrastructures
                     spec:
-                      tags: "\"allowedService\":<+service.tags>"
+                      tags: allowedService:<+service.tags>
                       matchType: any
           execution:
             steps:
@@ -47,7 +47,9 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: echo "filter testing"
+                        script: |-
+                          echo "filter testing"
+                          echo <+service.tags>>
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
