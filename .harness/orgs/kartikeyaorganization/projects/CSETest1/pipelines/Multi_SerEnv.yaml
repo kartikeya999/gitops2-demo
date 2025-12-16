@@ -34,7 +34,7 @@ pipeline:
                       - infrastructures
                     spec:
                       tags:
-                        environment: <+pipeline.variables.tagFilter>
+                        allowedService: <+pipeline.variables.tagFilter>
                       matchType: any
           execution:
             steps:
