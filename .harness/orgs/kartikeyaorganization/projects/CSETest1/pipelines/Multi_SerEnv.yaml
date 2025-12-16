@@ -33,7 +33,8 @@ pipeline:
                     entities:
                       - infrastructures
                     spec:
-                      tags: {}
+                      tags:
+                        environment: <+pipeline.variables.tagFilter>
                       matchType: any
           execution:
             steps:
@@ -68,4 +69,4 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
-  description: This pipeline was updated by Harness AI on 2025-12-15 11:14:51 UTC by Shylaja Sundararajan.
+  description: This pipeline was updated by Harness AI on 2025-12-16 10:41:33 UTC by Shylaja Sundararajan.
