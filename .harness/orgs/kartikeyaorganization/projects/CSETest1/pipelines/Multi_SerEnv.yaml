@@ -43,7 +43,7 @@ pipeline:
                       spec:
                         script: |-
                           echo "filter testing"
-                          echo <+service.tags[0]>
+                          echo <+service.tags>
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
