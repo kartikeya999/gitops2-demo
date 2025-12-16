@@ -33,7 +33,7 @@ pipeline:
                     entities:
                       - infrastructures
                     spec:
-                      tags: "\"allowedService\":<+service.tags.targetInfra>"
+                      tags: "\"allowedService\":<+service.tags>"
                       matchType: any
           execution:
             steps:
