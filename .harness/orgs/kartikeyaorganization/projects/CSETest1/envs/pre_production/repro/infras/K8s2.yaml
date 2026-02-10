@@ -1,8 +1,7 @@
 infrastructureDefinition:
   name: K8s2
   identifier: K8s2
-  tags:
-    allowedService: tempk8s
+  tags: {}
   orgIdentifier: kartikeyaorganization
   projectIdentifier: CSETest1
   environmentRef: repro
