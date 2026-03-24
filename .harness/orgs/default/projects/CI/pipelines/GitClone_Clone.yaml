@@ -1,0 +1,70 @@
+pipeline:
+  projectIdentifier: CI
+  orgIdentifier: default
+  tags:
+    kartikeya: ""
+  stages:
+    - stage:
+        name: Git-Clone
+        identifier: GitClone
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: RunName
+                  identifier: Run_1
+                  spec:
+                    shell: Sh
+                    command: |-
+                      ls -la
+                      ls -la /harness/CI-Usecases
+                      ls -la /harness/CI-Usecases/.harness
+                      tree /harness/
+                    envVariables:
+                      IMAGE_TAG: <+input>
+                      case1: "<+input>.default(abc).selectManyFrom(abc,def,geh)"
+                      case2: "<+input>.default(test2).selectManyFrom(test1,test2,test3)"
+                  timeout: 1d 1h
+          caching:
+            enabled: false
+            paths: []
+          buildIntelligence:
+            enabled: true
+          platform:
+            os: Linux
+            arch: Arm64
+          runtime:
+            type: Cloud
+            spec:
+              size: small
+              imageSpec:
+                imageName: ubuntu-latest
+          sharedPaths:
+            - /tmp/shared
+            - /var/run
+        variables:
+          - name: VERSION
+            type: String
+            description: ""
+            required: false
+            value: <+"0.0.1-"+<+pipeline.sequenceId>>
+  variables:
+    - name: test1
+      type: String
+      description: ""
+      required: false
+      value: test2
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.GitHub
+        repoName: CI-usecases
+        build: <+input>
+        sparseCheckout: []
+  allowStageExecutions: true
+  identifier: GitClone_Clone
+  name: Git-Clone - Clone
