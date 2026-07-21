@@ -9,7 +9,7 @@ infrastructureDefinition:
   spec:
     connectorRef: account.AWS_OIDC
     cluster: ap-south-1/kartikeya-eks
-    namespace: kartikeya
+    namespace: default
     releaseName: release-<+INFRA_KEY_SHORT_ID>
     region: ap-south-1
   allowSimultaneousDeployments: true
