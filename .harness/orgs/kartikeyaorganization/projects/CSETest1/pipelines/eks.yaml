@@ -34,8 +34,7 @@ pipeline:
           environment:
             environmentRef: eksenv
             deployToAll: false
-            infrastructureDefinitions:
-              - identifier: eksinfra
+            infrastructureDefinitions: <+input>
           execution:
             steps:
               - step:
