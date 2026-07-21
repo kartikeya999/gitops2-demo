@@ -1,0 +1,8 @@
+environment:
+  name: eks-env
+  identifier: eksenv
+  description: ""
+  tags: {}
+  type: PreProduction
+  orgIdentifier: kartikeyaorganization
+  projectIdentifier: CSETest1
