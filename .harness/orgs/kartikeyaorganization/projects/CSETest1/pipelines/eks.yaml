@@ -60,5 +60,8 @@ pipeline:
                 - AllErrors
               action:
                 type: StageRollback
+        when:
+          pipelineStatus: Success
+          condition: <+input>.default(true)
   delegateSelectors:
     - eks-delegate
