@@ -138,6 +138,8 @@ pipeline:
                           ls
 
                           tar -xvzf zipr.tgz
+
+                          echo test
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
