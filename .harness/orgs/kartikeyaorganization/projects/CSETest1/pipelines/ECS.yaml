@@ -1,0 +1,68 @@
+pipeline:
+  name: ECS
+  identifier: ECS
+  projectIdentifier: CSETest1
+  orgIdentifier: kartikeyaorganization
+  tags: {}
+  stages:
+    - stage:
+        name: ecs
+        identifier: ecs
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: ECS
+          service:
+            serviceRef: ecs
+          environment:
+            environmentRef: ecsenv
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: ecsinfra
+          execution:
+            steps:
+              - stepGroup:
+                  name: Blue Green Deployment
+                  identifier: blueGreenDeployment
+                  steps:
+                    - step:
+                        name: ECS Blue Green Create Service
+                        identifier: EcsBlueGreenCreateService
+                        type: EcsBlueGreenCreateService
+                        timeout: 10m
+                        spec:
+                          loadBalancer: abhishek-test
+                          prodListener: arn:aws:elasticloadbalancing:ap-south-1:915632791698:listener/app/abhishek-test/339bc6e24a1c0be0/1aa2c84fdfdcb6d5
+                          prodListenerRuleArn: arn:aws:elasticloadbalancing:ap-south-1:915632791698:listener-rule/app/abhishek-test/339bc6e24a1c0be0/1aa2c84fdfdcb6d5/d60341f3382f7d2e
+                          stageListener: arn:aws:elasticloadbalancing:ap-south-1:915632791698:listener/app/abhishek-test/339bc6e24a1c0be0/1aa2c84fdfdcb6d5
+                          stageListenerRuleArn: arn:aws:elasticloadbalancing:ap-south-1:915632791698:listener-rule/app/abhishek-test/339bc6e24a1c0be0/1aa2c84fdfdcb6d5/d60341f3382f7d2e
+                    - step:
+                        name: Ecs Blue Green Traffic Shift
+                        identifier: EcsBlueGreenTrafficShift
+                        type: EcsBlueGreenTrafficShift
+                        timeout: 10m
+                        spec:
+                          ecsTrafficShiftWrapper:
+                            type: Inherit
+                            spec:
+                              weightPercentage: 100
+            rollbackSteps:
+              - step:
+                  name: ECS Blue Green Rollback
+                  identifier: EcsBlueGreenRollback
+                  type: EcsBlueGreenRollback
+                  timeout: 10m
+                  spec: {}
+              - step:
+                  name: Stand Alone Traffic Shift Rollback
+                  identifier: StandAloneTrafficShiftRollback
+                  type: StandAloneTrafficShiftRollback
+                  timeout: 10m
+                  spec: {}
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
