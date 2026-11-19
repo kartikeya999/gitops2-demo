@@ -1,0 +1,13 @@
+infrastructureDefinition:
+  name: ecs-infra
+  identifier: ecsinfra
+  orgIdentifier: kartikeyaorganization
+  projectIdentifier: CSETest1
+  environmentRef: ecsenv
+  deploymentType: ECS
+  type: ECS
+  spec:
+    connectorRef: account.awsconnector
+    region: ap-south-1
+    cluster: cxe-testing
+  allowSimultaneousDeployments: false
